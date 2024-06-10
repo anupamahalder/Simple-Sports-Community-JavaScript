@@ -29,3 +29,22 @@
 .search-btn:hover{
     background-color: brown;
 }
+.sports-container{
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 20px;
+    margin-top: 50px;
+}
+.sports-card-main-container{
+    width: 70%;
+    box-shadow: 4px 4px 12px gray;
+    border-radius: 5px;
+    padding: 10px;
+}
+.sports-selected-card-container{
+    width: 30%;
+    box-shadow: 4px 4px 12px gray;
+    border-radius: 5px;
+    padding: 10px;
+}

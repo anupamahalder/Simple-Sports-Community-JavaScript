@@ -28,11 +28,24 @@
         </div>
       </nav>
     <!-- title  -->
-    <h1 class="p-3 text-center fs-5">Welcome To Our Sports Community</h1>
+    <h1 class="p-3 text-center fs-5 mt-5">Welcome To Our Sports Community</h1>
     <!-- search  -->
     <div class="search-container ">
         <input class="search-input" id="search-input" type="text" onkeydown="event.key === 'Enter' && handleSearch()" placeholder="Search by name...">
         <button onclick="handleSearch()" class="search-btn fs-5">Search</button>
+    </div>
+    <!-- sports container  -->
+    <div class="sports-container">
+        <!-- sports card container  -->
+        <div class="sports-card-main-container w-3/4" id="sports-card-main-container">
+            
+        </div>
+        <!-- selected sports card container  -->
+        <div class="sports-selected-card-container w-1/4">
+            <h4 class="fs-6 text-center">Added Member: <span class="member-count">0</span></h4>
+            <h4 class="fs-6 text-center">Member Limit: 11</span></h4>
+            <hr>
+        </div>
     </div>
 
     <script src="app.js"></script>
