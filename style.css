@@ -31,7 +31,6 @@
 }
 .sports-container{
     display: flex;
-    justify-content: space-around;
     gap: 20px;
     padding: 20px;
     margin-top: 50px;
@@ -41,12 +40,14 @@
     box-shadow: 4px 4px 12px gray;
     border-radius: 5px;
     padding: 10px;
+    height: auto;
 }
 .sports-selected-card-container{
     width: 30%;
     box-shadow: 4px 4px 12px gray;
     border-radius: 5px;
     padding: 10px;
+    background-color: #f1d7fa;
 }
 .sports-card-main-container{
     display: flex;
@@ -71,12 +72,14 @@
     font-weight: bold;
 }
 .person-card{
-    width: 250px;
-    height: 400px;
+    width: 220px;
+    height: 380px;
     border-radius: 8px;
     box-shadow: 4px 4px 8px gray;
     padding: 20px;
     margin-bottom: 20px;
+    font-size: small;
+    background-color: white;
 }
 .btn-style{
     border: none;
@@ -86,6 +89,7 @@
     padding: 5px 10px;
     font-weight: bold;
     cursor: pointer;
+    font-size: small;
 }
 .btn-style:hover{
     opacity: .8;
@@ -95,4 +99,10 @@
 }
 .add-btn{
     background-color: #0c2461;
+}
+.sports-group-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

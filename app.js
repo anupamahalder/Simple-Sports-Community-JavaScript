@@ -1,5 +1,5 @@
 const handlePersonProfile = (name) =>{
-    fetch(`https:\\www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=${name}`)
+    fetch(`https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=${name}`)
     .then(res => res.json())
     .then(persons =>{
         persons = persons.player;
@@ -12,33 +12,37 @@ const handlePersonProfile = (name) =>{
             div.innerHTML= `
             <p class="not-found">Matched with none of the player!!<p>
             <button onclick="handlePersonProfile('pta')" class="detail-btn btn-style">Go Back</button>
-            `
+            `;
             personListContainer.appendChild(div);
         }else
         persons.forEach(person =>{
-            // create a div 
-            const div = document.createElement("div");
-            div.classList.add("person-card");
-            div.innerHTML = `
-            <div class="image-container">
-            <img class="person-profile-img" src="${person.strThumb}" alt="">
-            </div>
-            <p><b>Name: </b>${person.strPlayer}</p>
-            <p><b>Sport: </b>${person.strSport}</p>
-            <p><b>Position: </b>${person.strPosition}</p>
-            <p><b>Gender: </b>${person.strGender}</p>
-            <p><b>Nationality: </b>${person.strNationality}</p>
-            <button class="add-btn btn-style" onclick="handleAddGroup">Add To Group</button>
-            <button class="detail-btn btn-style" onclick="handlePersonDetails">Details</button>
-            `;
-            // Add error handling for image
-            const img = div.querySelector('.person-profile-img');
-            img.onerror = () => {
-                img.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn57FZdEF9wfoDVcjIVV1mNxNUyFSJWDuL3Gli3ZXcExNqxgraCtdDOJz6pNA5bRIIzvs&usqp=CAU';
-            };
-            personListContainer.appendChild(div);
+            personListContainer.appendChild(handlePersonCard(person));
         })
     })
+}
+// create person card 
+const handlePersonCard = (person) =>{
+    // create a div 
+    const div = document.createElement("div");
+    div.classList.add("person-card");
+    div.innerHTML = `
+    <div class="image-container">
+    <img class="person-profile-img" src="${person.strThumb}" alt="">
+    </div>
+    <p><b>Name: </b>${person.strPlayer}</p>
+    <p><b>Sport: </b>${person.strSport}</p>
+    <p><b>Position: </b>${person.strPosition}</p>
+    <p><b>Gender: </b>${person.strGender}</p>
+    <p><b>Nationality: </b>${person.strNationality}</p>
+    <button class="add-btn btn-style" onclick="handleAddGroup(${person.idPlayer})">Add To Group</button>
+    <button class="detail-btn btn-style" onclick="handlePersonDetails(${person.idPlayer})">Details</button>
+    `;
+    // Add error handling for image
+    const img = div.querySelector('.person-profile-img');
+    img.onerror = () => {
+        img.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn57FZdEF9wfoDVcjIVV1mNxNUyFSJWDuL3Gli3ZXcExNqxgraCtdDOJz6pNA5bRIIzvs&usqp=CAU';
+    };
+    return div;
 }
 // call initial person profile load 
 handlePersonProfile("pta");
@@ -50,4 +54,78 @@ const handleSearch = ()=>{
     console.log(inputValue);
     document.getElementById("search-input").value = "";
     handlePersonProfile(inputValue);
+}
+
+// handle add to group 
+const handleAddGroup = (id)=>{
+    console.log(id);
+    // load person data 
+    fetch(`https://www.thesportsdb.com/api/v1/json/3/lookupplayer.php?id=${id}`)
+    .then(res => res.json())
+    .then(person =>{
+        person = person.players[0];
+        // clear the group list 
+        const groupListContainer = document.getElementById("sports-group-container");
+        // create a single person div 
+        const div = handlePersonCard(person);
+        groupListContainer.appendChild(div);
+        // update member count 
+        const memberCount = document.getElementById("member-count");
+        document.getElementById("member-count").innerText = 1 + parseInt(memberCount.innerText);
+        // update female count 
+        if(person.strGender === "Female"){
+            const femaleCount = document.getElementById("female-count");
+            document.getElementById("female-count").innerText = 1 + parseInt(femaleCount.innerText);
+        }
+        // update male count 
+        if(person.strGender === "Male"){
+            const maleCount = document.getElementById("male-count");
+            document.getElementById("male-count").innerText = 1 + parseInt(maleCount.innerText);
+        }
+        if(parseInt(memberCount.innerText) <= 11)
+        alert("Successfully added to group!");
+    })
+}
+// handle add to group 
+const handlePersonDetails = (id)=>{
+    console.log(id);
+    // load person data 
+    fetch(`https://www.thesportsdb.com/api/v1/json/3/lookupplayer.php?id=${id}`)
+    .then(res => res.json())
+    .then(person =>{
+        person = person.players[0];
+        // Create modal HTML dynamically
+        const modal = document.createElement('div');
+        modal.classList.add('modal', 'fade');
+        modal.setAttribute('id', 'personModal');
+        modal.setAttribute('tabindex', '-1');
+        modal.setAttribute('aria-labelledby', 'personModalLabel');
+        modal.setAttribute('aria-hidden', 'true');
+
+        modal.innerHTML = `
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-image">
+                        <img class="img-style2" src=${person.image} alt=""/></div>
+                        <h5 class="modal-title" id="personModalLabel">${person.title}</h5>
+                        <p>Category: ${person.category}</p>
+                        <p>Description: ${person.description}</p>
+                        <p>Price: Rs. ${person.price} /-</p>
+                        <!-- Add more details as needed -->
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Append modal to the body
+        document.body.appendChild(modal);
+
+        // Show the modal
+        const personModal = new bootstrap.Modal(modal);
+        personModal.show();
+    })
 }
