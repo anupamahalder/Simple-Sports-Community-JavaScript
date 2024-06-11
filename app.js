@@ -34,6 +34,14 @@ const handlePersonCard = (person) => {
         <p><b>Position: </b>${person.strPosition}</p>
         <p><b>Gender: </b>${person.strGender}</p>
         <p><b>Nationality: </b>${person.strNationality}</p>
+        <p><b>Social Links: 
+        <a href="${person.strFacebook}" target="_blank" rel="noopener noreferrer">
+        <img class="social-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAGE8ljXRyieCB8kw8Xirym_RYMXW2dkuwKg&s"></a>
+        <a href="${person.strInstagram}" target="_blank" rel="noopener noreferrer">
+        <img class="social-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9TiAas3wAW09cV4z1jQFYiBNLkJC_i7joTw&s"></a>
+        <a href="${person.strTwitter}" target="_blank" rel="noopener noreferrer">
+        <img class="social-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmJGaR_uW64_qK6pW7MwlHbDJc7rujJbbXPQ&s"></a>
+        </b></p>
         <button class="add-btn btn-style" data-player-id="${person.idPlayer}" onclick="handleAddGroup(${person.idPlayer})">Add To Group</button>
         <button class="detail-btn btn-style" onclick="handlePersonDetails(${person.idPlayer})">Details</button>
     `;
