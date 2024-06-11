@@ -48,3 +48,46 @@
     border-radius: 5px;
     padding: 10px;
 }
+.sports-card-main-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.person-profile-img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 5px auto;
+    box-shadow: 4px 4px 8px gray;
+}
+.image-container{
+    display: flex;
+    justify-content: center;
+}
+.person-card{
+    width: 250px;
+    height: 380px;
+    border-radius: 8px;
+    box-shadow: 4px 4px 8px gray;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.btn-style{
+    border: none;
+    box-shadow: 2px 2px 4px gray;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.btn-style:hover{
+    opacity: .8;
+}
+.detail-btn{
+    background-color: #b71540;
+}
+.add-btn{
+    background-color: #0c2461;
+}
