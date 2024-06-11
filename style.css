@@ -125,3 +125,19 @@
     cursor: pointer;
     object-fit: cover;
 }
+.detail-profile-image{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+.detail-profile-image-container{
+    display: flex;
+    justify-content: center;
+    background-color: aqua;
+    margin-bottom: 10px;
+}
+.detail-info-container{
+    padding-left: 20px;
+}

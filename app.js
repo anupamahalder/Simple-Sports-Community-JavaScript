@@ -29,11 +29,11 @@ const handlePersonCard = (person) => {
         <div class="image-container">
             <img class="person-profile-img" src="${person.strThumb}" alt="">
         </div>
-        <p><b>Name: </b>${person.strPlayer}</p>
-        <p><b>Sport: </b>${person.strSport}</p>
-        <p><b>Position: </b>${person.strPosition}</p>
-        <p><b>Gender: </b>${person.strGender}</p>
-        <p><b>Nationality: </b>${person.strNationality}</p>
+        <p><b>Name: </b>${person.strPlayer || "Unknown"}</p>
+        <p><b>Sport: </b>${person.strSport || "Unknown"}</p>
+        <p><b>Position: </b>${person.strPosition || "Unknown"}</p>
+        <p><b>Gender: </b>${person.strGender || "Unknown"}</p>
+        <p><b>Nationality: </b>${person.strNationality || "Unknown"}</p>
         <p><b>Social Links: 
         <a href="${person.strFacebook}" target="_blank" rel="noopener noreferrer">
         <img class="social-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAGE8ljXRyieCB8kw8Xirym_RYMXW2dkuwKg&s"></a>
@@ -113,7 +113,7 @@ const handleAddGroup = (id) => {
         })
         .catch(error => {
             console.error('Error fetching data:', error);
-            createAlert("Failed to add to the group!", "danger");
+            alert("Failed to add to the group!");
         });
 };
 
@@ -134,24 +134,42 @@ const handlePersonDetails = (id) => {
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
+                            <p><b>Player Details</b></p>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <div class="modal-image">
-                                <img class="img-style2" src=${person.strThumb} alt=""/>
+                            <div class="modal-image detail-profile-image-container">
+                                <img class="img-style2 detail-profile-image" src=${person.strThumb} alt=""/>
                             </div>
-                            <h5 class="modal-title" id="personModalLabel">${person.strPlayer}</h5>
-                            <p>Sport: ${person.strSport}</p>
-                            <p>Position: ${person.strPosition}</p>
-                            <p>Gender: ${person.strGender}</p>
-                            <p>Nationality: ${person.strNationality}</p>
+                            <div class="detail-info-container">
+                            <p><b>Name: </b>${person.strPlayer || "Unknown"}</p>
+                            <p><b>Sport: </b>${person.strSport || "Unknown"}</p>
+                            <p><b>Position: </b>${person.strPosition || "Unknown"}</p>
+                            <p><b>Gender: </b>${person.strGender || "Unknown"}</p>
+                            <p><b>Nationality: </b>${person.strNationality || "Unknown"}</p>
+                            <p><b>Date of Birth: </b>${person.dateBorn || "Unknown"}</p>
+                            <p><b>Birth Location: </b>${person.strBirthLocation || "Unknown"}</p>
+                            <p><b>Status: </b>${person.strStatus || "Unknown"}</p>
+                            <p><b>Social Links: 
+                            <a href="${person.strFacebook}" target="_blank" rel="noopener noreferrer">
+                            <img class="social-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAGE8ljXRyieCB8kw8Xirym_RYMXW2dkuwKg&s"></a>
+                            <a href="${person.strInstagram}" target="_blank" rel="noopener noreferrer">
+                            <img class="social-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9TiAas3wAW09cV4z1jQFYiBNLkJC_i7joTw&s"></a>
+                            <a href="${person.strTwitter}" target="_blank" rel="noopener noreferrer">
+                            <img class="social-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmJGaR_uW64_qK6pW7MwlHbDJc7rujJbbXPQ&s"></a>
+                            </b></p>
+                            </div>
                         </div>
                     </div>
                 </div>
             `;
-
+            const img = modal.querySelector('.detail-profile-image');
+            img.onerror = () => {
+                img.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn57FZdEF9wfoDVcjIVV1mNxNUyFSJWDuL3Gli3ZXcExNqxgraCtdDOJz6pNA5bRIIzvs&usqp=CAU';
+            };
             document.body.appendChild(modal);
             const personModal = new bootstrap.Modal(modal);
             personModal.show();
+            
         });
 };
