@@ -150,6 +150,7 @@ const handlePersonDetails = (id) => {
                             <p><b>Date of Birth: </b>${person.dateBorn || "Unknown"}</p>
                             <p><b>Birth Location: </b>${person.strBirthLocation || "Unknown"}</p>
                             <p><b>Status: </b>${person.strStatus || "Unknown"}</p>
+                            <p><b>Description: </b>${person.strDescriptionEN || "Unknown"}</p>
                             <p><b>Social Links: 
                             <a href="${person.strFacebook}" target="_blank" rel="noopener noreferrer">
                             <img class="social-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAGE8ljXRyieCB8kw8Xirym_RYMXW2dkuwKg&s"></a>
