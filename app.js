@@ -57,6 +57,13 @@ const handleSearch = () => {
 
 const handleAddGroup = (id) => {
     console.log(id);
+    // Check if the total count has reached the limit
+    const memberCount = document.getElementById("member-count");
+    if (parseInt(memberCount.innerText) >= 11) {
+        alert("Cannot add more than 11 members to the group!");
+        return;
+    }
+
     fetch(`https://www.thesportsdb.com/api/v1/json/3/lookupplayer.php?id=${id}`)
         .then(res => res.json())
         .then(data => {
